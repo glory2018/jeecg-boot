@@ -43,6 +43,7 @@ public class JeecgController<T, S extends IService<T>> {
 
     @Value("${jeecg.path.upload}")
     private String upLoadPath;
+
     /**
      * 导出excel
      *

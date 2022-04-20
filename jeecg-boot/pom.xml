@@ -120,6 +120,18 @@
 			<artifactId>fastjson</artifactId>
 			<version>${fastjson.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.bimface/bimface-java-sdk -->
+		<dependency>
+			<groupId>com.bimface</groupId>
+			<artifactId>bimface-java-sdk</artifactId>
+			<version>3.2.5</version>
+			<classifier>all</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

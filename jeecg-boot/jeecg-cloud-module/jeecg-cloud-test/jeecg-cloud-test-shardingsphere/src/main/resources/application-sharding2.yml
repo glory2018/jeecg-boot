@@ -9,13 +9,13 @@ spring:
         url: jdbc:mysql://jeecg-boot-mysql:3306/jeecg-boot?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
         type: com.alibaba.druid.pool.DruidDataSource
         username: root
-        password: root
+        password: 123456
       ds1:
         driverClassName: com.mysql.cj.jdbc.Driver
         url: jdbc:mysql://jeecg-boot-mysql:3306/jeecg-boot2?useSSL=false&useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai
         type: com.alibaba.druid.pool.DruidDataSource
         username: root
-        password: root
+        password: 123456
       names: ds0,ds1
     # 规则配置
     rules:
