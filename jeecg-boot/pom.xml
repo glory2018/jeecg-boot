@@ -124,7 +124,7 @@
 		<dependency>
 			<groupId>com.bimface</groupId>
 			<artifactId>bimface-java-sdk</artifactId>
-			<version>3.2.5</version>
+			<version>3.2.7</version>
 			<classifier>all</classifier>
 		</dependency>
 

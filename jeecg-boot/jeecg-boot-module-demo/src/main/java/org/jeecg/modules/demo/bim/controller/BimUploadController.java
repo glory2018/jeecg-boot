@@ -16,6 +16,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.modules.demo.bim.entity.BimDemo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -34,12 +35,8 @@ import java.util.List;
 @RequestMapping("/bim/model")
 @Slf4j
 public class BimUploadController {
-    // 通过(bimface.com)创建应用，并拿到自己的appKey和appSecret
-    public final static String APP_KEY = "Txyp85RELtjWg69tPniNInowYKjO0MtV";
-    public final static String APP_SECRET = "TvDVcI0V12uOMjJEPoKVH1rNP9WPq34l";
-    // 初始化BimfaceClient
-    Endpoint endPoint = new Endpoint("http://10.32.5.35:8011/", "http://10.32.5.35:8011/file/");
-    BimfaceClient bimfaceClient = new BimfaceClient(APP_KEY, APP_SECRET, endPoint);
+    @Autowired
+    private BimfaceClient bimfaceClient;
 
     /**
      * 获取view token
