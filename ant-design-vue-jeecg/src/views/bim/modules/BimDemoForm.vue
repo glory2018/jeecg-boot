@@ -5,7 +5,7 @@
         <a-row>
           <a-col :span="24">
             <a-form-model-item label="模型编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelCode">
-              <a-input v-model="model.modelCode" placeholder="请输入模型编号"></a-input>
+              <a-input disabled v-model="model.modelCode"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
@@ -52,6 +52,7 @@
 import { httpAction, getAction } from '@api/manage'
 import Vue from 'vue'
 import { ACCESS_TOKEN, TENANT_ID } from '@/store/mutation-types'
+
 export default {
   name: 'BimDemoForm',
   components: {},
@@ -65,7 +66,7 @@ export default {
   },
   data() {
     return {
-      model: {},
+      model: { modelCode: '', modelName: '', modelType: '', modelSize: '', modelStatus: '' },
       labelCol: {
         xs: { span: 24 },
         sm: { span: 5 }
@@ -86,16 +87,16 @@ export default {
   },
   computed: {
     //token header
-    tokenHeader(){
-      let head = {'X-Access-Token': Vue.ls.get(ACCESS_TOKEN)}
+    tokenHeader() {
+      let head = { 'X-Access-Token': Vue.ls.get(ACCESS_TOKEN) }
       let tenantid = Vue.ls.get(TENANT_ID)
-      if(tenantid){
+      if (tenantid) {
         head['tenant-id'] = tenantid
       }
-      return head;
+      return head
     },
     uploadUrl: function() {
-      return `${window._CONFIG['domianURL']}/${this.url.uploadUrl}`;
+      return `${window._CONFIG['domianURL']}/${this.url.uploadUrl}`
     },
     formDisabled() {
       return this.disabled
@@ -139,37 +140,24 @@ export default {
             that.confirmLoading = false
           })
         }
-
       })
     },
     /* 上传 */
     handleUpload(info) {
       this.loading = true
-      if (info.file.status !== 'uploading') {
-        console.log(info.file, info.fileList)
-      }
       if (info.file.status === 'done') {
         this.loading = false
         if (info.file.response.success) {
-          // this.$message.success(`${info.file.name} 文件上传成功`);
-          if (info.file.response.code === 201) {
-            let { message, result: { msg, fileUrl, fileName } } = info.file.response
-            let href = window._CONFIG['domianURL'] + fileUrl
-            this.$warning({
-              title: message,
-              content: (<div>
-                  <span>{msg}</span><br />
-                  <span>具体详情请 <a href={href} target="_blank" download={fileName}>点击下载</a> </span>
-                </div>
-              )
-            })
-          } else {
-            this.$message.success(info.file.response.message || `${info.file.name} 文件上传成功`)
-          }
-          this.loadData()
+          this.$message.success(info.file.response.message || `${info.file.name} 文件上传成功`)
+          this.model.modelCode = info.file.response.result.fileId
+          this.model.modelName = info.file.response.result.name
+          this.model.modelType = info.file.response.result.suffix
+          this.model.modelSize = (info.file.response.result.length / 1000 / 1024).toFixed(1)
+          this.model.modelStatus = info.file.response.result.status
         } else {
           this.$message.error(`${info.file.name} ${info.file.response.message}.`)
         }
+
       } else if (info.file.status === 'error') {
         this.$message.error(`文件上传失败: ${info.file.msg} `)
       }

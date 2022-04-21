@@ -5,23 +5,19 @@ import com.bimface.exception.BimfaceException;
 import com.bimface.file.bean.FileBean;
 import com.bimface.sdk.BimfaceClient;
 import com.bimface.sdk.bean.request.FileUploadRequest;
-import com.bimface.sdk.config.Endpoint;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.jeecg.common.api.vo.Result;
 import org.jeecg.modules.demo.bim.entity.BimDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -70,17 +66,19 @@ public class BimUploadController {
         //上传文件
         FileBean fileBean = null;
         try {
-            FileItemFactory factory = new DiskFileItemFactory();
-            ServletFileUpload upload = new ServletFileUpload(factory);
-            List<FileItem> fileItems = upload.parseRequest(request);
+            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
+            Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+//            FileItemFactory factory = new DiskFileItemFactory();
+//            ServletFileUpload upload = new ServletFileUpload(factory);
+//            List<FileItem> fileItems = upload.parseRequest(request);
             FileUploadRequest fileUploadRequest = new FileUploadRequest();
-            for (FileItem fileItem : fileItems) {
+            for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
+                MultipartFile fileItem = entity.getValue();
                 fileUploadRequest.setContentLength(fileItem.getSize());
-                fileUploadRequest.setName(fileItem.getName());
+                fileUploadRequest.setName(fileItem.getOriginalFilename());
                 fileUploadRequest.setInputStream(fileItem.getInputStream());
             }
             fileBean = bimfaceClient.upload(fileUploadRequest);
-        } catch (FileUploadException e) {
         } catch (Exception e) {
         }
 
@@ -88,11 +86,10 @@ public class BimUploadController {
         Long fileId = fileBean.getFileId();
 
         // 发起文件转换
-        FileTranslateBean translateBean = null;
         try {
-            translateBean = bimfaceClient.translate(fileId);
+            FileTranslateBean translateBean = bimfaceClient.translate(fileId);
         } catch (BimfaceException e) {
         }
-        return Result.OK(translateBean);
+        return Result.OK(fileBean);
     }
 }

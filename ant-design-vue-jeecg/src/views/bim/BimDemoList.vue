@@ -210,10 +210,9 @@ export default {
     },
     handlePreview(record) {
       this.loading = true
-      debugger
-      getAction(this.url.getViewToken, record.modelCode).then((res) => {
+      getAction(this.url.getViewToken, { fileId: record.modelCode }).then((res) => {
         if (res.success) {
-          this.$refs.modalView.init('b66c4e85666e408c9116c3651f8695ce')
+          this.$refs.modalView.init(res.result)
         } else {
           this.$message.warning(res.message)
         }
