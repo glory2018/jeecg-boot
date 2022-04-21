@@ -17,6 +17,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.Map;
 
 
@@ -84,12 +86,20 @@ public class BimUploadController {
 
         // 获取fileId
         Long fileId = fileBean.getFileId();
-
+        Map result = new HashMap();
+        result.put("modelCode", fileBean.getFileId());
+        result.put("modelName", fileBean.getName());
+        DecimalFormat df = new DecimalFormat("#.00");
+        result.put("modelType", fileBean.getSuffix());
+        result.put("modelSize", df.format(fileBean.getLength() / 1000 / 1024)+"MB");
         // 发起文件转换
         try {
             FileTranslateBean translateBean = bimfaceClient.translate(fileId);
+            if ("success".equals(translateBean.getStatus())) {
+                result.put("modelStatus", "转换成功");
+            }
         } catch (BimfaceException e) {
         }
-        return Result.OK(fileBean);
+        return Result.OK(result);
     }
 }

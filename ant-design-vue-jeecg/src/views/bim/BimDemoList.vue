@@ -137,32 +137,32 @@ export default {
           }
         },
         {
-          title: '模型编号',
+          title: '编号',
           align: 'center',
           dataIndex: 'modelCode'
         },
         {
-          title: '模型名称',
+          title: '名称',
           align: 'center',
           dataIndex: 'modelName'
         },
         {
-          title: '模型类型',
+          title: '类型',
           align: 'center',
           dataIndex: 'modelType'
         },
         {
-          title: '模型版本',
+          title: '版本',
           align: 'center',
           dataIndex: 'modelVersion'
         },
         {
-          title: '模型大小',
+          title: '大小',
           align: 'center',
           dataIndex: 'modelSize'
         },
         {
-          title: '转换状态',
+          title: '模型状态',
           align: 'center',
           dataIndex: 'modelStatus'
         },
@@ -200,12 +200,12 @@ export default {
     },
     getSuperFieldList() {
       let fieldList = []
-      fieldList.push({ type: 'string', value: 'modelCode', text: '模型编号', dictCode: '' })
-      fieldList.push({ type: 'string', value: 'modelName', text: '模型名称', dictCode: '' })
-      fieldList.push({ type: 'string', value: 'modelType', text: '模型类型', dictCode: '' })
-      fieldList.push({ type: 'string', value: 'modelVersion', text: '模型版本', dictCode: '' })
-      fieldList.push({ type: 'string', value: 'modelSize', text: '模型大小', dictCode: '' })
-      fieldList.push({ type: 'string', value: 'modelStatus', text: '转换状态', dictCode: '' })
+      fieldList.push({ type: 'string', value: 'modelCode', text: '编号', dictCode: '' })
+      fieldList.push({ type: 'string', value: 'modelName', text: '名称', dictCode: '' })
+      fieldList.push({ type: 'string', value: 'modelType', text: '类型', dictCode: '' })
+      fieldList.push({ type: 'string', value: 'modelVersion', text: '版本', dictCode: '' })
+      fieldList.push({ type: 'string', value: 'modelSize', text: '大小', dictCode: '' })
+      fieldList.push({ type: 'string', value: 'modelStatus', text: '模型状态', dictCode: '' })
       this.superFieldList = fieldList
     },
     handlePreview(record) {

@@ -4,40 +4,40 @@
       <a-form-model ref="form" :model="model" :rules="validatorRules" slot="detail">
         <a-row>
           <a-col :span="24">
-            <a-form-model-item label="模型编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelCode">
+            <a-form-model-item label="编号" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelCode">
               <a-input disabled v-model="model.modelCode"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="模型名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelName">
-              <a-input v-model="model.modelName" placeholder="请输入模型名称"></a-input>
+            <a-form-model-item label="名称" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelName">
+              <a-input v-model="model.modelName" placeholder="请输入名称"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="模型类型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelType">
-              <a-input v-model="model.modelType" placeholder="请输入模型类型"></a-input>
+            <a-form-model-item label="类型" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelType">
+              <a-input v-model="model.modelType" placeholder="请输入类型"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="模型版本" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelVersion">
-              <a-input v-model="model.modelVersion" placeholder="请输入模型版本"></a-input>
+            <a-form-model-item label="版本" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelVersion">
+              <a-input v-model="model.modelVersion" placeholder="请输入版本"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="模型大小" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelSize">
-              <a-input-number v-model="model.modelSize" placeholder="请输入模型大小" style="width: 100%" />
+            <a-form-model-item label="大小" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelSize">
+              <a-input v-model="model.modelSize" placeholder="请输入大小" style="width: 100%" />
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="转换状态" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelStatus">
-              <a-input v-model="model.modelStatus" placeholder="请输入转换状态"></a-input>
+            <a-form-model-item label="模型状态" :labelCol="labelCol" :wrapperCol="wrapperCol" prop="modelStatus">
+              <a-input v-model="model.modelStatus" placeholder="请输入模型状态"></a-input>
             </a-form-model-item>
           </a-col>
           <a-col :span="24">
-            <a-form-model-item label="模型" :labelCol="labelCol" :wrapperCol="wrapperCol">
+            <a-form-model-item label="上传" :labelCol="labelCol" :wrapperCol="wrapperCol">
               <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="uploadUrl"
                         @change="handleUpload">
-                <a-button type="primary" icon="import">上传</a-button>
+                <a-button type="primary" icon="import"></a-button>
               </a-upload>
             </a-form-model-item>
           </a-col>
@@ -149,11 +149,7 @@ export default {
         this.loading = false
         if (info.file.response.success) {
           this.$message.success(info.file.response.message || `${info.file.name} 文件上传成功`)
-          this.model.modelCode = info.file.response.result.fileId
-          this.model.modelName = info.file.response.result.name
-          this.model.modelType = info.file.response.result.suffix
-          this.model.modelSize = (info.file.response.result.length / 1000 / 1024).toFixed(1)
-          this.model.modelStatus = info.file.response.result.status
+          this.model = info.file.response.result
         } else {
           this.$message.error(`${info.file.name} ${info.file.response.message}.`)
         }
