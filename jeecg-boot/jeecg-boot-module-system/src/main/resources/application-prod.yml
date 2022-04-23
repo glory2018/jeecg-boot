@@ -321,3 +321,6 @@ third-app:
       # appSecret
       client-secret: ??
       agent-id: ??
+bimface:
+  app-key: 23i46LM2dDpXtx5f4mGI7aZPF9oL2AZC
+  app-secret: COSU6x4jo0rSyi0bUNkoDH6ezUCVJKxh

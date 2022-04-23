@@ -49,7 +49,7 @@
 
 <script>
 
-import { httpAction, getAction } from '@api/manage'
+import { httpAction } from '@api/manage'
 import Vue from 'vue'
 import { ACCESS_TOKEN, TENANT_ID } from '@/store/mutation-types'
 

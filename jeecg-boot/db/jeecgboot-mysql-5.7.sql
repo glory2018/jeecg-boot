@@ -8085,4 +8085,28 @@ INSERT INTO `tmp_report_data_income` VALUES ('中石油控股或有控股权', 3
 INSERT INTO `tmp_report_data_income` VALUES ('中石油参股', 72062.45, 0.00, 0.00, 0.00, 0.00, 0.00, 72062.75);
 INSERT INTO `tmp_report_data_income` VALUES ('非中石油', 1486526.90, 212070.72, 0.00, 0.00, 0.00, 226415.09, 1698597.62);
 
+DROP TABLE IF EXISTS `bim_demo`;
+CREATE TABLE `bim_demo` (
+  `id` varchar(36) NOT NULL,
+  `create_by` varchar(50) DEFAULT NULL COMMENT '创建人',
+  `create_time` date DEFAULT NULL COMMENT '创建日期',
+  `update_by` varchar(50) DEFAULT NULL COMMENT '更新人',
+  `update_time` date DEFAULT NULL COMMENT '更新日期',
+  `model_code` varchar(32) DEFAULT NULL COMMENT '模型编号',
+  `model_name` varchar(100) DEFAULT NULL COMMENT '模型名称',
+  `model_type` varchar(32) DEFAULT NULL COMMENT '模型类型',
+  `model_version` varchar(32) DEFAULT NULL COMMENT '模型版本',
+  `model_size` varchar(10) DEFAULT NULL COMMENT '模型大小',
+  `model_status` varchar(10) DEFAULT NULL COMMENT '转换状态',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of bim_demo
+-- ----------------------------
+BEGIN;
+INSERT INTO `bim_demo` VALUES ('1516668439544737794', 'admin', '2022-04-20', 'admin', '2022-04-21', '2121982739416160', '10KTA-PIPE-NI-ZZ#.nwc', 'nwc', 'A(2021.3.1)', '8MB', 'success');
+INSERT INTO `bim_demo` VALUES ('1516986911980298242', 'admin', '2022-04-21', NULL, NULL, '10000738026857', '图纸1', 'dwg', NULL, '1.00MB', '转换成功');
+COMMIT;
+
 SET FOREIGN_KEY_CHECKS = 1;

@@ -12,9 +12,11 @@
 
 <script>
 
+import bimface from '@api/BimfaceSDKLoader@latest-release'
 
 export default {
   name: 'BimDemoPreview',
+  mixins: [bimface],
   data() {
     return {
       title: '',

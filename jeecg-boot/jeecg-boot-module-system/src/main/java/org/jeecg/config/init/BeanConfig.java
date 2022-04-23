@@ -6,22 +6,22 @@
 package org.jeecg.config.init;
 
 import com.bimface.sdk.BimfaceClient;
-import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Moses
  * @date 2022/4/20
  */
-@Slf4j
-@Configuration
+@Component
 public class BeanConfig {
-    // 通过(bimface.com)创建应用，并拿到自己的appKey和appSecret
-    private String APP_KEY = "Txyp85RELtjWg69tPniNInowYKjO0MtV";
-    private String APP_SECRET = "TvDVcI0V12uOMjJEPoKVH1rNP9WPq34l";
-//    Endpoint endPoint = new Endpoint("http://10.32.5.35:8011/", "http://10.32.5.35:8011/file/");
+    @Value("${bimface.app-key}")
+    private String APP_KEY;
+    @Value("${bimface.app-secret}")
+    private String APP_SECRET;
 
+    //    Endpoint endPoint = new Endpoint("http://10.32.5.35:8011/", "http://10.32.5.35:8011/file/");
     // 初始化BimfaceClient
     @Bean
     public BimfaceClient bimfaceClient() {

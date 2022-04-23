@@ -112,7 +112,7 @@ import { mixinDevice } from '@/utils/mixin'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import BimDemoModal from './modules/BimDemoModal'
 import BimDemoPreview from '@views/bim/modules/BimDemoPreview'
-import { deleteAction, getAction } from '@api/manage'
+import { getAction } from '@api/manage'
 
 export default {
   name: 'BimDemoList',
