@@ -96,7 +96,12 @@ public class BimDemoController extends JeecgController<BimDemo, IBimDemoService>
     @ApiOperation(value = "建筑信息模型-通过id删除", notes = "建筑信息模型-通过id删除")
     @DeleteMapping(value = "/delete")
     public Result<String> delete(@RequestParam(name = "id", required = true) String id, @RequestParam(name = "fileId", required = true) Long fileId) throws BimfaceException {
-        bimfaceClient.deleteFile(fileId);
+
+        BimDemo bimDemo = bimDemoService.getById(id);
+        if (bimDemo == null) {
+            return Result.error("未找到对应数据");
+        }
+        bimfaceClient.deleteFile(Long.valueOf(bimDemo.getModelCode()));
         bimDemoService.removeById(id);
         return Result.OK("删除成功!");
     }

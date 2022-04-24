@@ -161,13 +161,13 @@ export const JeecgListMixin = {
           }
         })
       }
-    }, handleDelete: function(record) {
+    }, handleDelete: function(id) {
       if (!this.url.delete) {
         this.$message.error('请设置url.delete属性!')
         return
       }
       var that = this
-      deleteAction(that.url.delete, { id: record.id, fileId: record.modelCode }).then((res) => {
+      deleteAction(that.url.delete, { id: id }).then((res) => {
         if (res.success) {
           //重新计算分页问题
           that.reCalculatePage(1)
