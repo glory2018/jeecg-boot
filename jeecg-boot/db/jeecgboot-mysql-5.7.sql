@@ -6486,6 +6486,8 @@ INSERT INTO `sys_permission` VALUES ('fb367426764077dcf94640c843733985', '2a470f
 INSERT INTO `sys_permission` VALUES ('fba41089766888023411a978d13c0aa4', 'e41b69c57a941a3bbcce45032fe57605', 'AUTO树表单列表', '/online/cgformTreeList/:code', 'modules/online/cgform/auto/OnlCgformTreeList', NULL, NULL, 1, NULL, '1', 9.00, 0, NULL, 1, 1, NULL, 1, NULL, NULL, 'admin', '2019-05-21 14:46:50', 'admin', '2019-06-11 13:52:52', 0, 0, '1', NULL);
 INSERT INTO `sys_permission` VALUES ('fc810a2267dd183e4ef7c71cc60f4670', '700b7f95165c46cc7a78bf227aa8fed3', '请求追踪', '/monitor/HttpTrace', 'modules/monitor/HttpTrace', NULL, NULL, 1, NULL, NULL, 4.00, 0, NULL, 1, 1, NULL, 0, NULL, NULL, 'admin', '2019-04-02 09:46:19', 'admin', '2019-04-02 11:37:27', 0, 0, NULL, NULL);
 INSERT INTO `sys_permission` VALUES ('fedfbf4420536cacc0218557d263dfea', '6e73eb3c26099c191bf03852ee1310a1', '新消息通知', '/account/settings/notification', 'account/settings/Notification', NULL, NULL, 1, 'NotificationSettings', NULL, NULL, NULL, '', 1, 1, NULL, NULL, NULL, NULL, NULL, '2018-12-26 19:02:05', NULL, NULL, 0, 0, NULL, NULL);
+INSERT INTO `sys_permission` VALUES ('1516665295821615105', '', '建筑信息模型', '/bim', 'layouts/RouteView', NULL, NULL, 0, NULL, '1', 11.00, 0, 'box-plot', 1, 0, 0, 0, 0, NULL, 'admin', '2022-04-20 14:29:19', 'admin', '2022-04-20 14:30:48', 0, 0, '1', 0);
+INSERT INTO `sys_permission` VALUES ('1516666153946853377', '1516665295821615105', '模型列表', '/bim/BimDemoList', 'bim/BimDemoList', NULL, NULL, 1, NULL, '1', 11.10, 0, NULL, 1, 1, 0, 0, 0, NULL, 'admin', '2022-04-20 14:32:44', 'admin', '2022-04-20 14:33:34', 0, 0, '1', 0);
 
 -- ----------------------------
 -- Table structure for sys_permission3
