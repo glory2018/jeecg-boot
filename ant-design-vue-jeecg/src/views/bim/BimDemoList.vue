@@ -12,6 +12,7 @@
     <!-- 操作按钮区域 -->
     <div class="table-operator">
       <a-button @click="handleAdd" type="primary" icon="plus">新增</a-button>
+      <a-button @click="openDelete" type="primary" icon="plus">删除模型</a-button>
       <a-button type="primary" icon="download" @click="handleExportXls('建筑信息模型')">导出</a-button>
       <a-upload name="file" :showUploadList="false" :multiple="false" :headers="tokenHeader" :action="importExcelUrl"
                 @change="handleImportExcel">
@@ -90,7 +91,7 @@
                 <a @click="handleDetail(record)">详情</a>
               </a-menu-item>
               <a-menu-item>
-                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record.id)">
+                <a-popconfirm title="确定删除吗?" @confirm="() => handleDelete(record)">
                   <a>删除</a>
                 </a-popconfirm>
               </a-menu-item>
@@ -102,6 +103,7 @@
     </div>
     <bim-demo-modal ref="modalForm" @ok="modalFormOk"></bim-demo-modal>
     <bim-demo-preview ref="modalView"></bim-demo-preview>
+    <bim-demo-delete ref="modalDelete"></bim-demo-delete>
   </a-card>
 </template>
 
@@ -112,6 +114,7 @@ import { mixinDevice } from '@/utils/mixin'
 import { JeecgListMixin } from '@/mixins/JeecgListMixin'
 import BimDemoModal from './modules/BimDemoModal'
 import BimDemoPreview from '@views/bim/modules/BimDemoPreview'
+import BimDemoDelete from '@views/bim/modules/BimDemoDelete'
 import { getAction } from '@api/manage'
 
 export default {
@@ -119,6 +122,7 @@ export default {
   mixins: [JeecgListMixin, mixinDevice],
   components: {
     BimDemoPreview,
+    BimDemoDelete,
     BimDemoModal
   },
   data() {
@@ -219,6 +223,9 @@ export default {
       }).finally(() => {
         this.loading = false
       })
+    },
+    openDelete() {
+      this.$refs.modalDelete.init()
     }
   }
 }

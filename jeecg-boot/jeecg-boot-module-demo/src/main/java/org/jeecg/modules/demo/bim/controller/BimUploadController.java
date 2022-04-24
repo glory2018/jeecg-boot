@@ -91,7 +91,7 @@ public class BimUploadController {
         result.put("modelName", fileBean.getName());
         DecimalFormat df = new DecimalFormat("#.00");
         result.put("modelType", fileBean.getSuffix());
-        result.put("modelSize", df.format(fileBean.getLength() / 1000 / 1024)+"MB");
+        result.put("modelSize", df.format(fileBean.getLength() / 1000 / 1024) + "MB");
         // 发起文件转换
         try {
             FileTranslateBean translateBean = bimfaceClient.translate(fileId);
@@ -101,5 +101,23 @@ public class BimUploadController {
         } catch (BimfaceException e) {
         }
         return Result.OK(result);
+    }
+
+    /**
+     * 删除文件
+     *
+     * @param fileId
+     * @return
+     */
+    @ApiOperation(value = "建筑信息模型-删除文件", notes = "建筑信息模型-删除文件")
+    @GetMapping(value = "/deleteFile")
+    public Result<BimDemo> deleteFile(@RequestParam(name = "fileId", required = true) String fileId) {
+        try {
+            bimfaceClient.deleteFile(Long.valueOf(fileId));
+            return Result.OK("success");
+        } catch (BimfaceException e) {
+            return Result.OK("failure");
+        }
+
     }
 }
